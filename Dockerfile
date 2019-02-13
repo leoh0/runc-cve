@@ -34,7 +34,9 @@ RUN for VER in v1.12.6 v1.13.1 v17.03.2 v17.06.2 v17.09.1 v17.12.1 v18.03.1 v18.
         export GOARCH && \
         make BUILDTAGS="seccomp selinux apparmor" static && \
         mkdir -p dist && \
-        mv runc dist/runc-${VER}-${GOARCH} \
+        mv runc dist/runc-${VER}-${GOARCH} && \
+        make BUILDTAGS="seccomp selinux apparmor" && \
+        mv runc dist/runc-${VER}-${GOARCH}-nonstatic \
     ; done ; done && \
     cd dist && \
     sha256sum * > sha256sum-${GOARCH}.txt
